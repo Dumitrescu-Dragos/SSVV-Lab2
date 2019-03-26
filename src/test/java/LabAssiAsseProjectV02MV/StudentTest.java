@@ -54,7 +54,7 @@ public class StudentTest {
         service = new Service(repo, studentValidator, temaXMLRepository, temaValidator, notaXMLRepository, notaValidator);
     }
 
-    @Before
+    @After
     public void resetRepo()
     {
         String originalFilename = "fisiere/Studenti.xml";
