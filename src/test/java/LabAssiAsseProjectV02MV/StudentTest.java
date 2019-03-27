@@ -37,7 +37,6 @@ public class StudentTest {
 
     @BeforeClass
     public static void setup() {
-        String filenameStudent = "fisiere/Studenti.xml";
         String filenameTema = "fisiere/Teme.xml";
         String filenameNota = "fisiere/Note.xml";
         String filename = "fisiere/testStudenti.xml";
