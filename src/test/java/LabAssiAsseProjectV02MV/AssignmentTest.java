@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import static junit.framework.TestCase.assertNull;
 import static org.testng.Assert.assertNotNull;
 
 public class AssignmentTest {
@@ -64,14 +65,44 @@ public class AssignmentTest {
 
     @Test(expected = ValidationException.class)
     public void testCase1(){
-        Tema tema = new Tema("1","Laboratory 1",3,0);
+        Tema tema = new Tema("11","Laboratory 1",3,0);
         service.addTema(tema);
     }
 
     @Test(expected = ValidationException.class)
     public void testCase2(){
-        Tema tema = new Tema("1","Laboratory 1",15,12);
+        Tema tema = new Tema("12","Laboratory 2",15,12);
         service.addTema(tema);
     }
 
+    @Test(expected = ValidationException.class)
+    public void testCase3(){
+        Tema tema = new Tema("", "Laboratory 3", 4,3);
+        service.addTema(tema);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testCase4(){
+        Tema tema = new Tema("14", "", 5,4);
+        service.addTema(tema);
+    }
+
+    @Test
+    public void testCase5(){
+        assertNull(service.findTema("15"));
+        Tema tema = new Tema("15", "Laboratory 5", 5,4);
+        service.addTema(tema);
+        assertNotNull(service.findTema("15"));
+    }
+
+    @Test
+    public void testCase6(){
+        assertNotNull(service.findTema("5"));
+        String initialDescription = service.findTema("5").getDescriere();
+        assert(initialDescription != "Laboratory6");
+        Tema tema = new Tema("5", "Laboratory 6", 5,4);
+        service.addTema(tema);
+        assertNotNull(service.findTema("5"));
+        assert(service.findTema("5").getDescriere() == initialDescription);
+    }
 }
