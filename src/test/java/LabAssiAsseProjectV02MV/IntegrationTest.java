@@ -21,6 +21,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static junit.framework.TestCase.assertNull;
@@ -33,8 +35,17 @@ public class IntegrationTest {
     private static TemaXMLRepo temaRepo;
     private static NotaXMLRepo notaRepo;
 
+    private static List<String> addedStudents;
+    private static List<String> addedTeme;
+    private static List<String> addedNote;
+
     @BeforeClass
     public static void setup() {
+
+        addedStudents = new ArrayList<String>();
+        addedTeme = new ArrayList<String>();
+        addedNote = new ArrayList<String>();
+
         String filenameStudent = "fisiere/Studenti.xml";
         String filenameTema = "fisiere/Teme.xml";
         String filenameNota = "fisiere/Note.xml";
@@ -56,29 +67,32 @@ public class IntegrationTest {
 
     @Test
     public void testcase1(){
-        Assert.assertNull(service.findStudent("111"));
-        Student student = new Student("111","Alexandra",934,"alexandra.mail.com");
+        String id = "111";
+        Assert.assertNull(service.findStudent(id));
+        Student student = new Student(id,"Alexandra",934,"alexandra.mail.com");
         service.addStudent(student);
-        Assert.assertNotNull(service.findStudent("111"));
-        service.deleteStudent("111");
+        Assert.assertNotNull(service.findStudent(id));
+        addedStudents.add(id);
     }
 
     @Test
     public void testcase2(){
-        assertNull(service.findTema("15"));
-        Tema tema = new Tema("15", "Laboratory 5", 5,4);
+        String id = "15";
+        assertNull(service.findTema(id));
+        Tema tema = new Tema(id, "Laboratory 5", 5,4);
         service.addTema(tema);
-        assertNotNull(service.findTema("15"));
-        service.deleteTema("15");
+        assertNotNull(service.findTema(id));
+        addedTeme.add(id);
     }
 
     @Test
     public void testcase3(){
-        Assert.assertNull(service.findNota("100"));
-        Nota nota = new Nota( "100", "1", "2", 10 , LocalDate.of(2018,10,14));
+        String id = "100";
+        Assert.assertNull(service.findNota(id));
+        Nota nota = new Nota( id, "1", "2", 10 , LocalDate.of(2018,10,14));
         service.addNota(nota, "Bad");
-        Assert.assertNotNull(service.findNota("100"));
-        service.deleteNota("100");
+        Assert.assertNotNull(service.findNota(id));
+        addedNote.add(id);
     }
 
 
@@ -92,36 +106,8 @@ public class IntegrationTest {
     @After
     public void resetRepo()
     {
-        String filenameStudent = "fisiere/Studenti.xml";
-        String filenameTema = "fisiere/Teme.xml";
-        String filenameNota = "fisiere/Note.xml";
-        String filename1 = "fisiere/testTeme.xml";
-        String filename2 = "fisiere/testStudenti.xml";
-        String filename3 = "fisiere/testNote.xml";
-        try{
-            Scanner scanner1 = new Scanner(Paths.get(filenameTema));
-            Scanner scanner2 = new Scanner(Paths.get(filenameStudent));
-            Scanner scanner3 = new Scanner(Paths.get(filenameNota));
-            FileWriter fileWriter1 = new FileWriter(filename1, false);
-            FileWriter fileWriter2 = new FileWriter(filename2, false);
-            FileWriter fileWriter3 = new FileWriter(filename3, false);
-            String content1 = scanner1.useDelimiter("\\A").next();
-            String content2 = scanner2.useDelimiter("\\A").next();
-            String content3 = scanner3.useDelimiter("\\A").next();
-            fileWriter1.write(content1);
-            fileWriter2.write(content2);
-            fileWriter3.write(content3);
-            scanner1.close();
-            scanner2.close();
-            scanner3.close();
-            fileWriter1.close();
-            fileWriter2.close();
-            fileWriter3.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        temaRepo.loadFromFile();
-        notaRepo.loadFromFile();
-        studentRepo.loadFromFile();
+        addedStudents.forEach(id -> service.deleteStudent(id));
+        addedTeme.forEach(id -> service.deleteTema(id));
+        addedNote.forEach(id -> service.deleteNota(id));
     }
 }
