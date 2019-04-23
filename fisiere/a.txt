@@ -352,3 +352,45 @@ Nota: 10.0
 Predata in saptamana: 2
 Deadline: 3
 Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
+
+Tema: 2
+Nota: 10.0
+Predata in saptamana: 2
+Deadline: 3
+Feedback: Bad
